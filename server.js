@@ -10,6 +10,7 @@ const cors = require('cors');
 const MonthlyExpense = require('./models/monthlyExpenseModel');
 const port = 3001;
 const tls = require('tls');
+const compression = require('compression'); 
 console.log('TLS module is available.');
 
 require('dotenv').config();
@@ -21,8 +22,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-//app.use(cors());
+app.use(compression());
 app.use(bodyParser.json());
 
 //mongoose.set('debug', true); 
