@@ -24,6 +24,52 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+   
+    const intervalId = setInterval(() => {
+      showAlertDialog();
+    }, 60 * 1000); // 2 minutes in milliseconds
+    return () => clearInterval(intervalId);
+  }, []);
+  const showAlertDialog = () => {
+    
+     const result = window.confirm('You have been inactive for 1 min , do you want to continue or signout?');
+
+      if (result) {
+        handleRenewToken();
+      } else {
+        handleSignOut();
+      }
+  };
+
+  const handleRenewToken = async () => {
+    try {
+      // Make a request to the server to renew the token
+      const response = await fetch('http://localhost:3001/renewToken', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, 
+          'X-User-ID': userData.user._id,
+        },
+      });
+  
+      if (response.ok) {
+        // If the renewal request is successful, get the new token from the response
+        const { token: newToken } = await response.json();
+
+        setToken(newToken);
+  
+      } else {
+        // Handle the case where token renewal failed
+        console.error('Token renewal failed');
+      }
+    } catch (error) {
+      console.error('Error during token renewal:', error);
+    }
+  };
+
+
   const handleSignIn = (user, token) => {
     // Logic for signing in
     console.log(user)
@@ -40,23 +86,6 @@ const App = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
   };
-
-  // const scheduleTokenRefresh = () => {
-  //   // Schedule token refresh 45 seconds before expiration
-  //   const expirationTime = jwtDecode(token).exp * 1000;
-  //   const refreshTime = expirationTime - 45000;
-  //   setTimeout(refreshToken, refreshTime - Date.now());
-  // };
-
-  // const refreshToken = async () => {
-  //   // Logic to refresh the token (e.g., make a request to the server to get a new token)
-  //   // Update the user and token state with the new values
-  // };
-
-  // const handleTokenRefresh = () => {
-  //   // Manually trigger token refresh
-  //   refreshToken();
-  // };
 
   return (
     <Router>

@@ -51,7 +51,7 @@ app.post('/signin', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email, password });
     if (!user) return res.sendStatus(401);
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '3m' });
     res.json({ user, token });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -77,6 +77,15 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
+
+app.post('/renewToken', authenticateToken, (req, res) => {
+  // Logic to generate a new token
+  const userId = req.header('X-User-ID');
+  const newToken = jwt.sign({ userId }, process.env.JWT_SECRET, {
+    expiresIn: '1m',
+  });
+  res.json({ token: newToken });
+});
 
 app.post('/confBudget', authenticateToken, async (req, res) => {
   try {
