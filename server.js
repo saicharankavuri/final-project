@@ -16,7 +16,7 @@ console.log('TLS module is available.');
 require('dotenv').config();
 
 const corsOptions = {
-  origin: 'http://138.197.36.40:3000', // Replace with the origin of your React app
+  origin: 'http://159.203.113.177:3000', // Replace with the origin of your React app
   credentials: true,
 };
 
@@ -39,7 +39,8 @@ app.post('/signup', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.create({ email, password });
-    res.json(user);
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '3m' });
+    res.json({user, token});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -160,6 +161,6 @@ app.get('/montlyExpenses', async (req, res) => {
 
 
 
-app.listen(port, () => {
+app.listen(port, '159.203.113.177', () => {
   console.log(`Server is running on port ${port}`);
 });

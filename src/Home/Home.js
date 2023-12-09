@@ -110,7 +110,7 @@ const Home = ({ user, onSignOut }) => {
     }
 
     function getBudget() {
-      axios.get('http://138.197.36.40:3001/expenses', {
+      axios.get('http://159.203.113.177:3001/expenses', {
         headers: {
           'X-User-ID': user._id,
         },

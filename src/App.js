@@ -25,12 +25,14 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-   
-    const intervalId = setInterval(() => {
-      showAlertDialog();
-    }, 60 * 1000); // 2 minutes in milliseconds
-    return () => clearInterval(intervalId);
-  }, []);
+    if (user) {
+      const intervalId = setInterval(() => {
+        showAlertDialog();
+      }, 60 * 1000); // 1 minute in milliseconds
+
+      return () => clearInterval(intervalId);
+    }
+  }, [user]);
   const showAlertDialog = () => {
     
      const result = window.confirm('You have been inactive for 1 min , do you want to continue or signout?');
@@ -45,7 +47,7 @@ const App = () => {
   const handleRenewToken = async () => {
     try {
       // Make a request to the server to renew the token
-      const response = await fetch('http://138.197.36.40:3001/renewToken', {
+      const response = await fetch('http://159.203.113.177:3001/renewToken', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
