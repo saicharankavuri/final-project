@@ -16,7 +16,7 @@ console.log('TLS module is available.');
 require('dotenv').config();
 
 const corsOptions = {
-  origin: 'http://159.203.113.177:3000', // Replace with the origin of your React app
+  origin: 'http://138.197.36.40:3000', // Replace with the origin of your React app
   credentials: true,
 };
 
