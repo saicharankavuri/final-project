@@ -38,7 +38,7 @@ const App = () => {
     const result = window.confirm('Your token is about to expire. Click OK to renew the token, or Cancel to Signout.');
   
     if (result) {
-      
+      handleRenewToken();
     } 
     else {
        handleSignOut();
