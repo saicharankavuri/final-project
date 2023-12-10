@@ -2,7 +2,6 @@ import axios from 'axios';
 import { Chart } from 'chart.js/auto';
 import * as d3 from 'd3';
 import { default as React, useEffect, useRef, useState } from 'react';
-import Menu from '../Menu/Menu';
 
 const Home = ({ user, onSignOut }) => {
   const chartRef = useRef(null);
@@ -134,14 +133,14 @@ const Home = ({ user, onSignOut }) => {
 
   return (
     <div>
-      <Menu />
       <h2>Welcome, {user.email}!</h2>
-      <button onClick={onSignOut}>Sign Out</button>
-      {/* <button onClick={onTokenRefresh}>Refresh Token</button> */}
-      <h2> Pie Chart generated through D3JS </h2>
-      <div id="chart" ref={chartRef}></div><br></br>
+     
       {expensesData && (<>
-
+        <h2> Three different Visualizations representing the Budget </h2>
+        <div className="ChartsContainer">
+        
+      <div id="chart" ref={chartRef}></div><br></br>
+     
         <table>
         <thead>
           <tr>
@@ -158,11 +157,12 @@ const Home = ({ user, onSignOut }) => {
           ))}
         </tbody>
       </table>
-
+      </div>
+     
+      <canvas id="barChart" ref={barChartRef} width={200} height={100}></canvas>
       </>)}
       
-      <h2> Bar Chart generated through Chart.js </h2>
-      <canvas id="barChart" ref={barChartRef} width={200} height={100}></canvas>
+      
     </div>
   );
 };

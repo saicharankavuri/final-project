@@ -9,9 +9,8 @@ const app = express();
 const cors = require('cors');
 const MonthlyExpense = require('./models/monthlyExpenseModel');
 const port = 3001;
-const tls = require('tls');
 const compression = require('compression');
-console.log('TLS module is available.');
+
 
 require('dotenv').config();
 
@@ -39,7 +38,7 @@ app.post('/signup', async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.create({ email, password });
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '3m' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '10m' });
     res.json({user, token});
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -52,7 +51,7 @@ app.post('/signin', async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email, password });
     if (!user) return res.sendStatus(401);
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '3m' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '10m' });
     res.json({ user, token });
   } catch (error) {
     res.status(500).json({ error: error.message });

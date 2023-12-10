@@ -2,7 +2,6 @@ import axios from 'axios';
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
 import '../App.css';
-import Menu from '../Menu/Menu';
 
 
 
@@ -190,7 +189,6 @@ const MonthlyExpenses = ({userData}) => {
 
   return (
     <div>
-        <Menu />
         <div className="SignInContainer">
         <h2>Choose month to view the analysis</h2>
         <form className="SignInForm" onSubmit={handleSubmit}>

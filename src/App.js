@@ -4,6 +4,7 @@ import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-d
 import ConfBudget from './ConfBudget/ConfBudget';
 import Expenditure from './Expenditure/Expenditure';
 import Home from './Home/Home';
+import Menu from './Menu/Menu';
 import MonthlyExpenses from './MonthlyExpenses/MonthlyExpenses';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
@@ -34,14 +35,15 @@ const App = () => {
     }
   }, [user]);
   const showAlertDialog = () => {
-    
-     const result = window.confirm('You have been inactive for 1 min , do you want to continue or signout?');
-
-      if (result) {
-        handleRenewToken();
-      } else {
-        handleSignOut();
+    const result = window.confirm('Your token is about to expire. Click OK to renew the token, or Cancel to Signout.');
+  
+    if (result) {
+      
+    } 
+    else {
+       handleSignOut();
       }
+    
   };
 
   const handleRenewToken = async () => {
@@ -91,6 +93,7 @@ const App = () => {
 
   return (
     <Router>
+      {user && <Menu handleSignOut={handleSignOut} />} 
       <Routes>
         <Route
           path="/"

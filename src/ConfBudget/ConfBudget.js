@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../App.css';
-import Menu from "../Menu/Menu";
 
 const ConfBudget = ({ userData }) => {
   const [description, setDescription] = useState('');
@@ -32,6 +31,7 @@ const ConfBudget = ({ userData }) => {
 
       if (response.ok) {
         const newExpense = await response.json();
+        alert('The budget has been created , go to home page to check out the visualizations');
         console.log(newExpense); // Update the user state or perform any necessary actions
       } else {
         // Handle server-side error
@@ -47,7 +47,6 @@ const ConfBudget = ({ userData }) => {
 
   return (
     <div>
-      <Menu />
       <div className="SignInContainer">
         <h2>Add new Expense</h2>
         <form className="SignInForm" onSubmit={handleSubmit}>

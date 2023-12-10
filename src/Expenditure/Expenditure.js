@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Menu from '../Menu/Menu';
 
 const ExpenseForm = ({userData}) => {
   const [descriptionOptions, setDescriptionOptions] = useState([]);
@@ -78,6 +77,7 @@ const ExpenseForm = ({userData}) => {
 
       if (response.ok) {
         const newExpense = await response.json();
+        alert('The monthly expense has been created , go to View Monthly Expenditure to compare the data');
         console.log(newExpense); // Update the user state or perform any necessary actions
       } else {
         // Handle server-side error
@@ -93,7 +93,6 @@ const ExpenseForm = ({userData}) => {
 
   return (
     <div>
-    <Menu />
     <div className="SignInContainer">
      
       <h2>Expense Form</h2>
