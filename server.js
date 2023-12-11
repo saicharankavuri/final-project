@@ -15,7 +15,7 @@ const compression = require('compression');
 require('dotenv').config();
 
 const corsOptions = {
-  origin: 'http://138.197.36.40:3000', // Replace with the origin of your React app
+  origin: 'http://159.203.113.177:3000', // Replace with the origin of your React app
   credentials: true,
 };
 
@@ -106,8 +106,31 @@ app.post('/confBudget', authenticateToken, async (req, res) => {
 });
 
 
-// Get all expenses
-// Get all expenses
+app.post('/delBudget', async (req, res) => {
+  try {
+    const { expense } = req.body;
+
+    // Check if _id is provided
+    if (!expense) {
+      return res.status(400).json({ error: 'Expense _id is required' });
+    }
+
+    // Find and delete the expense by _id
+    const deletedExpense = await Expense.findByIdAndDelete(expense);
+
+    // Check if the expense was found and deleted
+    if (!deletedExpense) {
+      return res.status(404).json({ error: 'Expense not found' });
+    }
+
+    res.json({ message: 'Expense deleted successfully', deletedExpense });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 app.get('/expenses', async (req, res) => {
   try {
     const userId = req.header('X-User-ID');
@@ -160,6 +183,6 @@ app.get('/montlyExpenses', async (req, res) => {
 
 
 
-app.listen(port, '159.203.113.177', () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
