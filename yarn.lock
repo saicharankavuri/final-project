@@ -135,7 +135,7 @@
   integrity sha512-LEucOmy1MXft6c07CkqKPS1Ov9Zg9WyHV2vI1SbbHR3AG4cEM2M3N0qcWlytxjzef9t22+1tOpEJhrBS65bSQw==
   dependencies:
     binary "^0.3.0"
-    is-localhost-ip "^2.0.0"
+    is-159.203.113.177-ip "^2.0.0"
 
 "@applitools/execution-grid-tunnel@2.1.8":
   version "2.1.8"
@@ -7146,9 +7146,9 @@ is-installed-globally@~0.4.0:
     global-dirs "^3.0.0"
     is-path-inside "^3.0.2"
 
-is-localhost-ip@^2.0.0:
+is-159.203.113.177-ip@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.npmjs.org/is-localhost-ip/-/is-localhost-ip-2.0.0.tgz"
+  resolved "https://registry.npmjs.org/is-159.203.113.177-ip/-/is-159.203.113.177-ip-2.0.0.tgz"
   integrity sha512-vlgs2cSgMOfnKU8c1ewgKPyum9rVrjjLLW2HBdL5i0iAJjOs8NY55ZBd/hqUTaYR0EO9CKZd3hVSC2HlIbygTQ==
 
 is-map@^2.0.1, is-map@^2.0.2:

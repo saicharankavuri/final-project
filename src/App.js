@@ -49,7 +49,7 @@ const App = () => {
   const handleRenewToken = async () => {
     try {
       // Make a request to the server to renew the token
-      const response = await fetch('http://localhost:3001/renewToken', {
+      const response = await fetch('http://159.203.113.177:3001/renewToken', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
