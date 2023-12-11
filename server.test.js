@@ -7,7 +7,7 @@ const app = require('./server');
 
 describe('POST /signup', () => {
   it('should create a new user', async () => {
-    const response = await fetch('http://159.203.113.177:3001/signup', {
+    const response = await fetch('http://localhost:3001/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ describe('POST /signup', () => {
   });
 
   it('should sign in an existing user', async () => {
-    const response = await fetch('http://159.203.113.177:3001/signin', {
+    const response = await fetch('http://localhost:3001/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -25,7 +25,7 @@ const ConfBudget = ({ userData }) => {
   
 
       // Call your backend API to create a new expense
-      const response = await fetch('http://159.203.113.177:3001/confBudget', {
+      const response = await fetch('http://localhost:3001/confBudget', {
         method: 'POST',
         body: JSON.stringify({ description, amount, user }),
         headers: {
@@ -65,7 +65,7 @@ const ConfBudget = ({ userData }) => {
   
       console.log(formData.expense);
       // Call your backend API to create a new expense
-      const response = await fetch('http://159.203.113.177:3001/delBudget', {
+      const response = await fetch('http://localhost:3001/delBudget', {
         method: 'POST',
         body: JSON.stringify({ expense: formData.expense }),
         headers: {
@@ -102,7 +102,7 @@ const ConfBudget = ({ userData }) => {
 
   useEffect(() => {
     // Fetch description options from the database
-    axios.get('http://159.203.113.177:3001/expenses', {
+    axios.get('http://localhost:3001/expenses', {
         headers: {
           'X-User-ID': userData.user._id,
         },

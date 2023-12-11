@@ -28,12 +28,12 @@ const MonthlyExpenses = ({userData}) => {
     const fetchData = async () => {
       try {
         const [expensesResponse, monthlyExpensesResponse] = await Promise.all([
-          axios.get('http://159.203.113.177:3001/expenses', {
+          axios.get('http://localhost:3001/expenses', {
             headers: {
               'X-User-ID': userData.user._id,
             },
           }),
-          axios.get('http://159.203.113.177:3001/montlyExpenses', {
+          axios.get('http://localhost:3001/montlyExpenses', {
             headers: {
               'X-User-ID': userData.user._id,
             },
@@ -73,7 +73,7 @@ const MonthlyExpenses = ({userData}) => {
   const chartRef2 = useRef(null);
   const handleSubmit = async (event) => {
     const idToDescriptionMap = new Map();
-    setShowCharts(true);
+    
     fetchedData.forEach(item => {
     idToDescriptionMap.set(item._id, item.description);
     });
@@ -180,15 +180,18 @@ const MonthlyExpenses = ({userData}) => {
           .attr("transform", function (d) { return "translate(" + arc.centroid(d) + ")"; })
           .attr("text-anchor", "middle")
           .text(function (d) { return d.data.description; });
+          setShowCharts(true);
   
       }
       Chart_create(fetchedData, 'chart');
       Chart_create_month(resultArray, 'chart2');
+      
     event.preventDefault();
   };
 
   return (
     <div>
+      <center><h2>Double click the submit button to view the charts</h2></center>
         <div className="SignInContainer">
         <h2>Choose month to view the analysis</h2>
         <form className="SignInForm" onSubmit={handleSubmit}>
